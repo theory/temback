@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file. It uses the
   [Keep a Changelog]: https://keepachangelog.com/en/1.1.0/
   [Semantic Versioning]: https://semver.org/spec/v2.0.0.html
     "Semantic Versioning 2.0.0"
+q
+## [v0.5.1] — 2026-01-01
+
+### 🏗️ Build and Distribution
+
+*   Updated all dependencies.
+*   Upgraded to Go v1.25.5.
+*   Upgraded to golangci-lint v2.7.2, fixed minor issues.
+
+  [v0.5.0]: https://github.com/theory/temback/compare/v0.5.0...v0.5.1
+
 
 ## [v0.5.0] — 2025-07-11
 

@@ -203,10 +203,11 @@ func dump(cfg *backupConfig, info *dbInfo) error {
 	// Assemble the commands.
 	globals := []string{"roles", "tablespaces"}
 	jobs := make([]Job, 0, len(info.dbs)+len(globals))
+	ctx := context.Background()
 	for _, g := range globals {
 		// #nosec G204
-		jobs = append(jobs, Job{name: g, cmd: exec.Command(
-			"pg_dumpall", "-r", "-f", path.Join(cfg.name, g+".sql"),
+		jobs = append(jobs, Job{name: g, cmd: exec.CommandContext(
+			ctx, "pg_dumpall", "-r", "-f", path.Join(cfg.name, g+".sql"),
 		)})
 	}
 
@@ -230,8 +231,8 @@ func dump(cfg *backupConfig, info *dbInfo) error {
 		}
 		// #nosec G204
 		jobs = append(jobs,
-			Job{name: db + " database", cmd: exec.Command(
-				"pg_dump",
+			Job{name: db + " database", cmd: exec.CommandContext(
+				ctx, "pg_dump",
 				slices.Concat(dbArgs, []string{path.Join(cfg.name, "db-"+db+ext), db})...,
 			)},
 		)

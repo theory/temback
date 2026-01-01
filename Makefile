@@ -2,7 +2,7 @@ GO       ?= go
 GOOS     ?= $(word 1,$(subst /, ,$(word 4, $(shell $(GO) version))))
 GOARCH   ?= $(word 2,$(subst /, ,$(word 4, $(shell $(GO) version))))
 PLATFORM := $(GOOS)-$(GOARCH)
-VERSION  := v0.5.0
+VERSION  := v0.5.1
 REVISION := $(shell git rev-parse --short HEAD)
 REGISTRY ?= localhost:5001
 ldflags = -ldflags="-s -w -X 'main.version=$(VERSION)' -X 'main.build=$(REVISION)'"
@@ -70,4 +70,4 @@ lint: .pre-commit-config.yaml .golangci.yaml
 
 .PHONY: debian-lint-depends # Install linting tools on Debian
 debian-lint-depends:
-	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sudo sh -s -- -b /usr/bin v2.2.2
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sudo sh -s -- -b /usr/bin v2.7.2
